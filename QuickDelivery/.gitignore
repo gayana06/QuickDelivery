@@ -1,0 +1,6 @@
+# Standard VS, C# and editor stuff
+*.suo
+*.user
+QuickDelivery/bin/
+QuickDelivery/obj/
+.vs/
