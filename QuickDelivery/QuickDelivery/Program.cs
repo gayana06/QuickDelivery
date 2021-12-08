@@ -15,17 +15,18 @@ namespace QuickDelivery
 
         private static IHostBuilder CreateHostBuilder(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
-
-            var url = (string)config.GetValue(typeof(string), "HostBaseUrl");
-
-            var webHostBuilder = Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(s =>
+            var webHostBuilder = new HostBuilder()
+                .ConfigureWebHost(s =>
                 {
+                    s.UseKestrel();
+                    s.UseIIS();
+                    s.UseIISIntegration();
                     s.UseStartup<Startup>();
-                    s.UseUrls(url);
+                })
+                .ConfigureAppConfiguration((context, configBuilder) =>
+                {
+                    configBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                    configBuilder.AddEnvironmentVariables();
                 })
                 .UseDefaultServiceProvider((context, options) => { options.ValidateOnBuild = true; });
 
