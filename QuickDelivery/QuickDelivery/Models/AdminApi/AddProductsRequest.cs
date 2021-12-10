@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace QuickDelivery.Models
+namespace QuickDelivery.Models.AdminApi
 {
     public class AddProductsRequest
     {
@@ -15,11 +15,12 @@ namespace QuickDelivery.Models
             public string Name { get; set; }
 
             [Required]
-            //[ValidateEnumStringValueExists(typeof(JuridicalType))]
+            //TODo:[ValidateEnumStringValueExists(typeof(JuridicalType))]
             public List<string> DeliveryDays { get; set; }
 
             [Required]
-            //[ValidateEnumStringValueExists(typeof(JuridicalType))]
+            // TODo:[ValidateEnumStringValueExists(typeof(JuridicalType))]
+            //TODo:ExternalProduct  DaysInAdvance 5
             public string ProductType { get; set; }
 
             [Required]

@@ -3,9 +3,9 @@ using QuickDelivery.Entities;
 
 namespace QuickDelivery.Services
 {
-    public interface IAdminService
+    public interface ICustomerService
     {
         //Request response model, possible discussion point.
-        List<long> AddProducts(List<Product> products);
+        List<PossibleDeliveryDates> FindPossibleDeliveryDates(List<long> productIds);
     }
 }

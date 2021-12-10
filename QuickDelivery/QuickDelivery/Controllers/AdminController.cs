@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using QuickDelivery.Entities;
 using QuickDelivery.Enums;
-using QuickDelivery.Models;
+using QuickDelivery.Models.AdminApi;
 using QuickDelivery.Services;
 
 namespace QuickDelivery.Controllers
