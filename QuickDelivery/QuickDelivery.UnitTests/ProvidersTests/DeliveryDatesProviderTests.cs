@@ -116,39 +116,5 @@ namespace QuickDelivery.UnitTests.ProvidersTests
             var numberOfDaysTillNextSunday = (nextSunday - DateTime.Today).Days;
             Assert.Equal(numberOfDaysTillNextSunday, result.Count);
         }
-
-        private List<Product> GetAListOfProductsToBeDelivered()
-        {
-            return new List<Product>
-            {
-                new Product(
-                    _fixture.Create<string>()
-                    , new List<WeekDay> {WeekDay.Monday, WeekDay.Tuesday}
-                    , ProductType.Normal
-                    , 1),
-                new Product(
-                    _fixture.Create<string>()
-                    , new List<WeekDay> {WeekDay.Tuesday, WeekDay.Wednesday}
-                    , ProductType.Normal
-                    , 2),
-                new Product(
-                    _fixture.Create<string>()
-                    , new List<WeekDay> {WeekDay.Tuesday, WeekDay.Friday}
-                    , ProductType.Normal
-                    , 3)
-            };
-        }
-
-        private List<DateTime> GetNext14DPotentialDeliveryDays()
-        {
-            var potentialDeliveryDates = new List<DateTime>();
-
-            for (var i = 1; i <= 14; i++)
-            {
-                potentialDeliveryDates.Add(DateTime.Today.AddDays(i));
-            }
-
-            return potentialDeliveryDates;
-        }
     }
 }
