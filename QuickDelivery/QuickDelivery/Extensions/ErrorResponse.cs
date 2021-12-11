@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using Guid = System.Guid;
 
 namespace QuickDelivery.Extensions
 {
@@ -9,7 +8,7 @@ namespace QuickDelivery.Extensions
         {
             ErrorCode = errorCode;
             ErrorMessage = errorMessage;
-            ErrorReference = Trace.CorrelationManager.ActivityId;
+            ErrorReference = Guid.NewGuid();
         }
 
         public string ErrorCode { get; }

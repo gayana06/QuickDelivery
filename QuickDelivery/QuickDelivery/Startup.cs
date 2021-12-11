@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using QuickDelivery.Filters;
 using QuickDelivery.Providers;
@@ -11,18 +9,12 @@ namespace QuickDelivery
 {
     public class Startup
     {
-        private readonly IConfiguration _config;
-
-        public Startup(IConfiguration config)
-        {
-            _config = config;
-        }
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers(options =>
             {
                 options.Filters.Add(typeof(ValidateModelFilter));
+                options.Filters.Add(typeof(HttpResponseExceptionFilter));
             });
 
             services.AddRouting();
@@ -35,7 +27,7 @@ namespace QuickDelivery
             services.AddSingleton<IProductRepository, ProductRepository>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
             app.UseEndpoints(endpoints =>

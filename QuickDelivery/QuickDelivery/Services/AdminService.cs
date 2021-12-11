@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using QuickDelivery.Entities;
+using QuickDelivery.Exceptions;
 using QuickDelivery.Repositories;
 
 namespace QuickDelivery.Services
@@ -44,7 +46,7 @@ namespace QuickDelivery.Services
                 return;
             }
 
-            throw new Exception($"Product(s) '{string.Join(',', alreadyExistingProducts)}' already exists");
+            throw new GenericApiException(HttpStatusCode.BadRequest, "PRODUCT_ALREADY_EXISTS", $"Product(s) '{string.Join(',', alreadyExistingProducts)}' already exists");
         }
     }
 }

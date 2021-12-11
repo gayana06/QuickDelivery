@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using QuickDelivery.Entities;
+using QuickDelivery.Exceptions;
 using QuickDelivery.Providers;
 using QuickDelivery.Repositories;
 
@@ -40,7 +41,7 @@ namespace QuickDelivery.Services
 
             if (productIds.Any(productId => !allProductIds.Contains(productId)))
             {
-                throw new Exception("List contains invalid product ids");
+                throw new GenericApiException(HttpStatusCode.BadRequest, "INVALID_PRODUCT_ID",$"Only '{string.Join(',', allProductIds)}' are valid product ids");
             }
 
             var selectedProducts = _productRepository.GetProductsByIds(productIds);
