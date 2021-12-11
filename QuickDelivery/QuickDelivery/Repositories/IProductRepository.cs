@@ -5,7 +5,10 @@ namespace QuickDelivery.Repositories
 {
     public interface IProductRepository
     {
-        long AddOrUpdateProduct(Product product);
+        long AddProduct(Product product);
+        List<long> GetAllProductIds();
+        List<string> GetAllProductNames();
         List<Product> GetAllProducts();
+        List<Product> GetProductsByIds(List<long> productIds);
     }
 }

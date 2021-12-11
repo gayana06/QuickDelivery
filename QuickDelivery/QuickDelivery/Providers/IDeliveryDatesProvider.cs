@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using QuickDelivery.Entities;
 
-namespace QuickDelivery.Helpers
+namespace QuickDelivery.Providers
 {
     public interface IDeliveryDatesProvider
     {

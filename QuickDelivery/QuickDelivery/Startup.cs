@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QuickDelivery.Filters;
+using QuickDelivery.Providers;
 using QuickDelivery.Repositories;
 using QuickDelivery.Services;
 
@@ -18,12 +20,18 @@ namespace QuickDelivery
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(ValidateModelFilter));
+            });
+
             services.AddRouting();
 
             services.AddOpenApiDocument();
 
             services.AddTransient<IAdminService, AdminService>();
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IDeliveryDatesProvider, DeliveryDatesProvider>();
             services.AddSingleton<IProductRepository, ProductRepository>();
         }
 

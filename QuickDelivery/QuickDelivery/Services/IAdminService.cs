@@ -7,5 +7,6 @@ namespace QuickDelivery.Services
     {
         //Request response model, possible discussion point.
         List<long> AddProducts(List<Product> products);
+        List<Product> GetAllProducts();
     }
 }

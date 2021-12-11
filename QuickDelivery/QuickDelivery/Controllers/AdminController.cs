@@ -40,9 +40,22 @@ namespace QuickDelivery.Controllers
 
         [HttpGet]
         [Route("adminapi/products")]
-        public string GetAllProducts()
+        public IActionResult GetAllProducts()
         {
-            return "Hi";
+            var allProducts = _adminService.GetAllProducts();
+            var response = new GetAllProductsResponse();
+
+            foreach (var product in allProducts)
+            {
+                response.Products.Add(new GetAllProductsResponse.Product(
+                    product.Id,
+                    product.Name,
+                    product.DeliveryDays.ConvertAll(p => p.ToString()),
+                    product.ProductType.ToString(),
+                    product.DaysInAdvance));
+            }
+
+            return Ok(response);
         }
     }
 }

@@ -14,19 +14,21 @@ namespace QuickDelivery.Repositories
             _productDictionary = new Dictionary<long, Product>();
         }
         
-        public long AddOrUpdateProduct(Product product)
+        public long AddProduct(Product product)
         {
-            var (productExists, existingProductId) = CheckProductAlreadyExistsAndFind(product.Name);
+            product.Id = GetNewProductId();
+            _productDictionary.Add(product.Id, product);
+            return product.Id;
+        }
 
-            if (!productExists)
-            {
-                var newProductId = GetNewProductId();
-                _productDictionary.Add(newProductId, product);
-                return newProductId;
-            }
-            
-            _productDictionary[existingProductId.Value] = product;
-            return existingProductId.Value;
+        public List<long> GetAllProductIds()
+        {
+            return _productDictionary.Keys.ToList();
+        }
+
+        public List<string> GetAllProductNames()
+        {
+            return _productDictionary.Values.Select(product => product.Name).ToList();
         }
 
         public List<Product> GetAllProducts()
@@ -34,29 +36,21 @@ namespace QuickDelivery.Repositories
             return _productDictionary.Values.ToList();
         }
 
+        public List<Product> GetProductsByIds(List<long> productIds)
+        {
+            var selectedProducts = new List<Product>();
+           
+            foreach (var productId in productIds)
+            {
+                selectedProducts.Add(_productDictionary[productId]);   
+            }
+
+            return selectedProducts;
+        }
+
         private long GetNewProductId()
         {
             return _productDictionary.Count == 0 ? 1 : _productDictionary.Keys.Max() + 1;
-        }
-
-        private (bool, long?) CheckProductAlreadyExistsAndFind(string productName)
-        {
-            var productExists = false;
-            long? productId = null;
-
-            foreach (var record in _productDictionary)
-            {
-                if (!record.Value.Name.Equals(productName, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    continue;
-                }
-
-                productExists = true;
-                productId = record.Key;
-                break;
-            }
-
-            return (productExists, productId);
         }
     }
 }
