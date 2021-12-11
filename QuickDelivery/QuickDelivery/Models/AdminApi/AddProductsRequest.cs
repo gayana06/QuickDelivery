@@ -28,15 +28,15 @@ namespace QuickDelivery.Models.AdminApi
             /// <summary>
             /// List of delivery days
             /// </summary>
-            /// <example>Monday, Tuesday</example>
+            /// <example>["Monday", "Tuesday"]</example>
             [Required]
             [ValidateEnumStringValueExists(typeof(WeekDay))]
             public List<string> DeliveryDays { get; set; }
 
             /// <summary>
-            /// List of delivery days
+            /// List of delivery days. Possible values are Normal, "External, Temporary
             /// </summary>
-            /// <example>Normal, External, Temporary</example>
+            /// <example>Normal</example>
             [Required]
             [ValidateEnumStringValueExists(typeof(ProductType))]
             public string ProductType { get; set; }
