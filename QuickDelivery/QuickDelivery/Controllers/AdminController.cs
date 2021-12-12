@@ -20,7 +20,7 @@ namespace QuickDelivery.Controllers
 
         [HttpPost]
         [Route("adminapi/products")]
-        public IActionResult PostAsync([FromBody] AddProductsRequest addProductsRequest)
+        public IActionResult PostProducts([FromBody] AddProductsRequest addProductsRequest)
         {
             var mappedProducts = new List<Product>();
             

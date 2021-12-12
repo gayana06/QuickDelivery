@@ -16,7 +16,7 @@ namespace QuickDelivery.Controllers
 
         [HttpGet]
         [Route("customerapi/products/delivery")]
-        public IActionResult PostAsync([FromQuery] GetDeliveryDatesRequest getDeliveryDatesRequest)
+        public IActionResult GetDeliveryDates([FromQuery] GetDeliveryDatesRequest getDeliveryDatesRequest)
         {
             var possibleDeliveryDates = _customerService.FindPossibleDeliveryDatesOrThrow(getDeliveryDatesRequest.ProductIds);
 
