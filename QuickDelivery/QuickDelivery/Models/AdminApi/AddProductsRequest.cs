@@ -30,6 +30,7 @@ namespace QuickDelivery.Models.AdminApi
             /// </summary>
             /// <example>["Monday", "Tuesday"]</example>
             [Required]
+            [EnsureMinimumElements(1)]
             [ValidateEnumStringValueExists(typeof(WeekDay))]
             public List<string> DeliveryDays { get; set; }
 
